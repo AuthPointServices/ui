@@ -24,7 +24,8 @@ export function InlineAlert({ variant = 'informative', title, children, action, 
   const { box, icon } = LOOK[variant];
   return (
     <div role={variant === 'negative' ? 'alert' : 'status'} className={cx('flex gap-3 rounded-lg border-(length:--border-2) bg-bg p-4', box, className)}>
-      <span className="mt-0.5 shrink-0">{icon}</span>
+      {/* Centrado en la primera línea, la del título o, sin él, la de la frase. */}
+      <span className={cx('flex h-[1lh] shrink-0 items-center', title ? 'text-200 leading-tight' : 'text-100')}>{icon}</span>
       <div className="min-w-0 flex-1">
         {title && <p className="text-200 leading-tight font-bold text-fg-strong">{title}</p>}
         {children && <div className={cx('text-100 text-fg', title && 'mt-1')}>{children}</div>}
