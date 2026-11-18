@@ -1,0 +1,8 @@
+@authpoint/ui
+
+Los valores de src/theme.css (espacios, tamaños, letra, radios, grises y colores de estado) se generan desde
+@adobe/spectrum-tokens (https://github.com/adobe/spectrum-design-data), Copyright Adobe, con licencia Apache-2.0
+(http://www.apache.org/licenses/LICENSE-2.0). Se cambió el tono del color de acento; el resto se usa tal cual.
+
+Los componentes se construyen sobre react-aria-components, Copyright Adobe, Apache-2.0. Los iconos son de lucide-react
+(ISC).

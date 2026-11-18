@@ -1,0 +1,4 @@
+/* La hoja del arnés y de las vistas de cada componente; las apps importan su propio Tailwind con theme.css. */
+@import 'tailwindcss';
+@import './theme.css';
+@source '.';
