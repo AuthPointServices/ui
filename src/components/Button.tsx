@@ -28,6 +28,12 @@ const look = ({ variant = 'secondary', fillStyle = 'fill', size = 'm', isIconOnl
   focusRing,
 );
 
+// Los estados de react-aria son data-*; un elemento nativo los tiene como pseudoclases.
+const NATIVE: [string, string][] = [['data-[hovered]:', 'hover:'], ['data-[pressed]:', 'active:'], ['data-[focus-visible]:', 'focus-visible:'], ['data-[disabled]:', 'disabled:'], ['data-[pending]:', 'aria-disabled:']];
+
+/** Las clases de un botón para un <button> o un <a> nativo: formularios que envía el navegador, como los de Keycloak. */
+export const nativeButtonClass = (l: Look = {}) => NATIVE.reduce((s, [a, b]) => s.replaceAll(a, b), look(l));
+
 export interface ButtonProps extends Omit<AriaButtonProps, 'className' | 'children'>, Look {
   children: React.ReactNode;
   className?: string;

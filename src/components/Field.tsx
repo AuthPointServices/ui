@@ -38,6 +38,22 @@ export function FieldHelp({ description, errorMessage }: { description?: string 
   );
 }
 
+/** Un <input> nativo con la caja de un campo, para formularios que envía el navegador; el alto lo pone quien lo usa. */
+export const nativeInputClass = cx(
+  'w-full min-w-0 rounded-md border-(length:--border-2) border-field-border bg-bg px-(--space-control-x) text-200 text-fg-strong placeholder:text-fg-muted',
+  'transition-[border-color] duration-150 hover:border-gray-700',
+  'outline-none focus-visible:outline-(length:--focus-ring) focus-visible:outline-offset-(length:--focus-gap) focus-visible:outline-solid focus-visible:outline-focus',
+  'aria-invalid:border-negative-900 aria-invalid:hover:border-negative-900 disabled:border-gray-200 disabled:text-fg-disabled',
+);
+
+/** Un <input type="radio"> nativo con el círculo de Spectrum: marcado, el borde del acento se ensancha hacia el centro. */
+export const nativeRadioClass = cx(
+  'size-(--size-checkbox) shrink-0 cursor-pointer appearance-none rounded-full border-(length:--border-2) border-field-border bg-bg',
+  'transition-[border-color,border-width] duration-150 hover:border-gray-800 checked:border-[5px] checked:border-accent checked:hover:border-accent-hover',
+  'outline-none focus-visible:outline-(length:--focus-ring) focus-visible:outline-offset-(length:--focus-gap) focus-visible:outline-solid focus-visible:outline-focus',
+  'disabled:cursor-default disabled:border-gray-400',
+);
+
 // Sin radio: lo pone cada campo.
 export const fieldBox = cx(
   'flex h-(--size-control-m) w-full min-w-0 items-center border-(length:--border-2) border-field-border bg-bg text-200 text-fg-strong',

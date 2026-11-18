@@ -157,6 +157,10 @@ Plano por capas: el suelo `layer-1`, las tarjetas `layer-2` sin sombra. La sombr
 - **SeatMeter**, **StatusLight**, **Badge**, **InlineAlert**, **Dialog** y **AlertDialog**, **ActionMenu**,
   **Toasts**, **Tabs**, **Tooltip**, **Switch**, **Avatar**: ver `src/components`.
 - **AppFrame**, **ProductSwitcher** y **AccountMenu**: el armazón común a la Cuenta, la consola y el sitio principal.
+- **Clases nativas** (`nativeButtonClass`, `nativeInputClass`, `nativeRadioClass`): el mismo aspecto sobre `<button>`,
+  `<a>` e `<input>` nativos, para formularios que envía el navegador (las pantallas de Keycloak). Fuera de ahí, los
+  componentes.
+- **Tema**: lo pone `data-theme` en `<html>`; `dark:` sigue a ese atributo, no a la preferencia del sistema.
 
 ## Do's and Don'ts
 
@@ -219,3 +223,26 @@ Plano por capas: el suelo `layer-1`, las tarjetas `layer-2` sin sombra. La sombr
   enviar, sesión caducada, sin permiso)», «Resto de formularios de la consola (Configuración, alta de organización y
   cambio de papel en el área interna de Seedle, asignar herramienta)», «Búsqueda sin resultados en las tablas».
 <!-- /decision:20261117-error-de-un-campo-textfield-invalido -->
+<!-- decision:20261118-entrar-en-su-estado-lleno-aviso-de-exito -->
+- Do (decisión `20261118-entrar-en-su-estado-lleno-aviso-de-exito`, juez claude-opus-5.5 xhigh, opción A): Las
+  pantallas de acceso se anclan arriba y, si no caben, se desplaza el documento. El aire entre la barra del idioma y
+  el título depende sólo del alto de la ventana y nunca del contenido: clamp(32px, 13svh, 160px) desde 768 px de ancho
+  y 24 px por debajo. Así, en una misma ventana, el título está a la misma altura en todos los estados y con o sin
+  error. Los avisos y errores de página van siempre debajo del subtítulo. Ninguna columna centra en vertical ni
+  reparte el alto libre: lo que sobra queda al pie. En las pantallas de uno o dos campos, el título, los avisos, los
+  campos y el botón principal caben en la primera vista de 1440x780 y 1024x700. Los proveedores, la passkey y los
+  enlaces secundarios pueden quedar bajo el pliegue. En los formularios largos, el botón queda al final del recorrido
+  y nunca se pega al pie. No hay scroll interno, scroll horizontal ni barras fijas. El panel de la marca mide el alto
+  de la ventana y no se desplaza. Al final del desplazamiento quedan entre 32 y 48 px bajo el último elemento.
+  Se mide con: `solape-hermanos`, `sobrante-repartido`. Propuestos: `check nuevo (condición 0)`, `check nuevo
+  (condición 1)`, `check nuevo (condición 2)`, `check nuevo (condición 3)`, `check nuevo (condición 4)`, `check nuevo
+  (condición 5)`, `check nuevo (condición 7)`.
+  Lo juzga el juez: En la captura de lleno a 1440x852 se ven enteros, sin desplazar, el título, el aviso, los dos
+  campos y el botón «Iniciar sesión». El nombre Seedle del panel se ve completo, con el mismo margen al pie que en la
+  captura de vacío.
+  Aplica también a: «Crear la cuenta (nombre, apellidos, correo, contraseña con requisitos y proveedores)»,
+  «Configurar los dos pasos (código QR, clave, código y nombre del dispositivo) y elegir la contraseña con la lista de
+  requisitos», «Avisos, errores, cerrar sesión y verificar el correo (contenido corto)», «Aviso de lleno («Si hay una
+  cuenta con ese correo, en unos minutos te llegará el enlace.»)», «Campo Correo con foco en lleno», «Botón de passkey
+  en lleno», «Selector de idioma».
+<!-- /decision:20261118-entrar-en-su-estado-lleno-aviso-de-exito -->

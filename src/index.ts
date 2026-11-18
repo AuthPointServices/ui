@@ -1,10 +1,11 @@
 export { AppFrame, Wordmark, type NavItem } from './components/AppFrame';
 export { Avatar } from './components/Avatar';
+export { cx, focusRing } from './components/styles';
 export { Badge, StatusLight, type Status } from './components/StatusLight';
-export { Button, LinkButton, type ButtonProps, type ButtonVariant, type LinkButtonProps } from './components/Button';
+export { Button, LinkButton, nativeButtonClass, type ButtonProps, type ButtonVariant, type LinkButtonProps } from './components/Button';
 export { Checkbox, CheckboxGroup, type CheckboxGroupProps, type CheckboxProps } from './components/Checkbox';
 export { AlertDialog, Dialog } from './components/Dialog';
-export { FieldDescription, FieldErrorText, FieldLabel } from './components/Field';
+export { FieldDescription, FieldErrorText, FieldLabel, nativeInputClass, nativeRadioClass } from './components/Field';
 export { AccountMenu, ProductSwitcher, type AccountAction, type Product } from './components/GlobalNav';
 export { InlineAlert, type AlertVariant } from './components/InlineAlert';
 export { Link, type LinkProps } from './components/Link';

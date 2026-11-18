@@ -171,6 +171,9 @@ ${decl(shadows('light'))}
   }
 }
 
+/* El tema lo pone data-theme, no la preferencia del sistema (la de Tailwind por omisión). */
+@custom-variant dark (&:where([data-theme='dark'], [data-theme='dark'] *));
+
 @media ${TOUCH} {
   :root {
 ${decl(touchSizes(), '    ')}
