@@ -3,6 +3,7 @@ import { useState } from 'react';
 import { I18nProvider } from 'react-aria-components';
 
 import { Button } from './Button';
+import { ProductSwitcher } from './GlobalNav';
 import { AlertDialog } from './Dialog';
 import { InlineAlert } from './InlineAlert';
 import { SegmentedControl } from './SegmentedControl';
@@ -122,5 +123,21 @@ describe('InlineAlert', () => {
     expect(screen.getByRole('alert').textContent).toContain('No se pudo terminar el cambio.');
     fireEvent.click(screen.getByRole('button', { name: 'Cerrar el aviso' }));
     expect(onDismiss).toHaveBeenCalledOnce();
+  });
+});
+
+describe('ProductSwitcher', () => {
+  it('sin productos no pinta el botón', () => {
+    render(<ProductSwitcher products={[]} />);
+    expect(screen.queryByRole('button')).toBeNull();
+  });
+
+  it('un producto sin logo lleva su inicial', () => {
+    render(<ProductSwitcher products={[{ id: 'o', name: 'Orange', href: 'https://o.example', logo: '/o.svg' }, { id: 'l', name: 'lab', href: 'https://lab.example' }]} />);
+    fireEvent.click(screen.getByRole('button', { name: 'Ir a otro producto' }));
+    const items = screen.getAllByRole('menuitem');
+    expect(items[0]!.querySelector('img')?.getAttribute('src')).toBe('/o.svg');
+    expect(items[1]!.querySelector('img')).toBeNull();
+    expect(items[1]!.textContent).toBe('Llab');
   });
 });

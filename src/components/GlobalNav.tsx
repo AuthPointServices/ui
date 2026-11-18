@@ -7,7 +7,7 @@ import { cx, focusRing } from './styles';
 const trigger = cx('grid size-(--size-control-l) place-items-center rounded-full text-fg-muted data-[hovered]:bg-hover data-[hovered]:text-fg-strong data-[pressed]:bg-hover touch:size-11', focusRing);
 const popover = 'rounded-lg border-(length:--border-1) border-border bg-layer-2 shadow-(--shadow-elevated) outline-none';
 
-export interface Product { id: string; name: string; href: string; logo: string }
+export interface Product { id: string; name: string; href: string; logo?: string | undefined }
 
 export function ProductSwitcher({ products }: { products: Product[] }) {
   if (!products.length) return null;
@@ -19,7 +19,10 @@ export function ProductSwitcher({ products }: { products: Product[] }) {
         <Menu aria-label="Productos" style={{ gridTemplateColumns: `repeat(${columns}, 6.5rem)` }} className="grid gap-1 outline-none">
           {products.map((p) => (
             <MenuItem key={p.id} id={p.id} href={p.href} textValue={p.name} className="flex flex-col items-center gap-2 rounded-md px-2 pt-3 pb-2 text-100 text-fg-strong outline-none data-[focused]:bg-hover">
-              <img src={p.logo} alt="" width={40} height={40} />
+              {p.logo ? <img src={p.logo} alt="" width={40} height={40} /> : (
+                // Sin logo, su inicial en una ficha del mismo tamaño.
+                <span aria-hidden="true" className="grid size-10 place-items-center rounded-md bg-layer-1 text-300 font-bold text-fg-strong">{p.name.charAt(0).toUpperCase()}</span>
+              )}
               <span className="max-w-full truncate">{p.name}</span>
             </MenuItem>
           ))}
