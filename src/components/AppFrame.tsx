@@ -37,10 +37,8 @@ export function AppFrame({ brand, product, home, actions, nav, current, children
         Saltar al contenido
       </a>
       <header className="sticky top-0 z-30 flex h-16 items-center gap-4 border-b-(length:--border-1) border-border bg-bg px-6 max-md:h-14 max-md:px-4">
-        <Link href={home.href} aria-label={home.label} className={cx('-mx-2 flex h-(--size-control-m) items-center gap-3 rounded-md px-2 text-300 leading-tight', focusRing)}>
-          <span className="font-bold text-fg-strong">{brand}</span>
-          <span aria-hidden="true" className="h-5 w-px bg-border-strong" />
-          <span className="text-fg-muted">{product}</span>
+        <Link href={home.href} aria-label={home.label} className={cx('-mx-2 flex h-(--size-control-m) items-center rounded-md px-2', focusRing)}>
+          <Wordmark brand={brand} product={product} />
         </Link>
         {actions && <div className="ml-auto flex items-center gap-1">{actions}</div>}
       </header>
@@ -89,5 +87,16 @@ function Tab({ item: { href, label }, isCurrent }: { item: NavItem; isCurrent: b
       <span className="col-start-1 row-start-1">{label}</span>
       {isCurrent && <span aria-hidden="true" className="absolute inset-x-0 bottom-0 h-0.5 rounded-full bg-accent forced-colors:bg-[Highlight]" />}
     </Link>
+  );
+}
+
+// La raya separa marca y app: «Seedle Cuenta» seguido se leería como un nombre.
+export function Wordmark({ brand, product }: { brand: string; product: string }) {
+  return (
+    <span className="flex items-center gap-3 text-300 leading-tight">
+      <span className="font-bold text-fg-strong">{brand}</span>
+      <span aria-hidden="true" className="h-5 w-px bg-border-strong" />
+      <span className="text-fg-muted">{product}</span>
+    </span>
   );
 }

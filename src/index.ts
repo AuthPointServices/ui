@@ -1,7 +1,7 @@
-export { AppFrame, type NavItem } from './components/AppFrame';
+export { AppFrame, Wordmark, type NavItem } from './components/AppFrame';
 export { Avatar } from './components/Avatar';
 export { Badge, StatusLight, type Status } from './components/StatusLight';
-export { Button, type ButtonProps, type ButtonVariant } from './components/Button';
+export { Button, LinkButton, type ButtonProps, type ButtonVariant, type LinkButtonProps } from './components/Button';
 export { Checkbox, CheckboxGroup, type CheckboxGroupProps, type CheckboxProps } from './components/Checkbox';
 export { AlertDialog, Dialog } from './components/Dialog';
 export { FieldDescription, FieldErrorText, FieldLabel } from './components/Field';
@@ -10,6 +10,7 @@ export { InlineAlert, type AlertVariant } from './components/InlineAlert';
 export { Link, type LinkProps } from './components/Link';
 export { ActionMenu, type MenuAction } from './components/Menu';
 export { SeatMeter } from './components/Meter';
+export { SegmentedControl, type Segment } from './components/SegmentedControl';
 export { ProgressCircle } from './components/ProgressCircle';
 export { SearchField, type SearchFieldProps } from './components/SearchField';
 export { Select, type SelectOption, type SelectProps } from './components/Select';

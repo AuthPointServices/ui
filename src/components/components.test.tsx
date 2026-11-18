@@ -4,6 +4,8 @@ import { I18nProvider } from 'react-aria-components';
 
 import { Button } from './Button';
 import { AlertDialog } from './Dialog';
+import { InlineAlert } from './InlineAlert';
+import { SegmentedControl } from './SegmentedControl';
 import { SeatMeter } from './Meter';
 import { TextField } from './TextField';
 import { Cell, Column, Row, Table, TableBody, TableHeader } from './Table';
@@ -97,5 +99,28 @@ describe('Button', () => {
     render(<Button isPending>Enviar invitación</Button>);
     expect(screen.getByRole('button', { name: /Enviar invitación/ })).toBeTruthy();
     expect(screen.getByRole('progressbar', { name: 'Un momento' })).toBeTruthy();
+  });
+});
+
+describe('SegmentedControl', () => {
+  it('elige una opción y no deja ninguna sin elegir', () => {
+    const onChange = vi.fn();
+    render(<SegmentedControl label="Mostrar" items={[{ id: 'all', label: 'Todo' }, { id: 'security', label: 'Fallos y cambios' }]} selected="all" onChange={onChange} />);
+    expect(screen.getByRole('radio', { name: 'Todo' }).getAttribute('aria-checked')).toBe('true');
+    fireEvent.click(screen.getByRole('radio', { name: 'Fallos y cambios' }));
+    expect(onChange).toHaveBeenCalledWith('security');
+    onChange.mockClear();
+    fireEvent.click(screen.getByRole('radio', { name: 'Todo' }));
+    expect(onChange.mock.calls.every(([id]) => id === 'all')).toBe(true);
+  });
+});
+
+describe('InlineAlert', () => {
+  it('se cierra con su botón y el negativo interrumpe', () => {
+    const onDismiss = vi.fn();
+    render(<InlineAlert variant="negative" onDismiss={onDismiss}>No se pudo terminar el cambio.</InlineAlert>);
+    expect(screen.getByRole('alert').textContent).toContain('No se pudo terminar el cambio.');
+    fireEvent.click(screen.getByRole('button', { name: 'Cerrar el aviso' }));
+    expect(onDismiss).toHaveBeenCalledOnce();
   });
 });
